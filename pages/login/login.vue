@@ -2,7 +2,7 @@
 	<view v-if="!isLogin" class="login">
 		
 		<view style="width:300rpx;margin-top:15%;margin-bottom:50rpx;">
-			<u-image width="100%" height="300rpx" src="/static/teacher.png" shape="circle"></u-image>
+			<u-image width="100%" height="300rpx" src="/static/student1.png" shape="circle"></u-image>
 		</view>
 		
 		<u-form style="width:90%;background-color: #FFFFFF;padding:0 20rpx;">
@@ -20,7 +20,7 @@
 					<u-button @click="login" style="width:80%;" :ripple="true"  type="primary">登录</u-button>
 				</u-col>
 				<u-col span="6">
-					<u-button @click="login" style="width:80%;" :ripple="true"  type="primary">注册</u-button>
+					<u-button @click="register" style="width:80%;" :ripple="true"  type="primary">注册</u-button>
 				</u-col>
 			</u-row>
 		</view>
@@ -36,6 +36,8 @@
 	export default {
 		data() {
 			return {
+				login_id:'000000',
+				login_id2:'',
 				isLogin:false,
 				loginUser:{
 					u_id:'',
@@ -49,10 +51,12 @@
 				await this.$u.post('/student_user/login',this.loginUser);
 				//到这里一定成功
 				uni.setStorageSync("isLogin",true)//在客户端存储信息，结构式键值对
+				uni.setStorageSync("login_id",this.loginUser.u_id)//在客户端存储信息，结构式键值对
+				this.login_id2 = uni.getStorageSync("login_id");
+				console.log('the login id is'+this.login_id2);
 				this.$u.toast('登陆成功!');
 				this.$u.route({
-								url: 'pages/index/index',
-								type: 'tab'
+								url: 'pages/classlist/classlist',
 							})
 			},
 			async logout(){
@@ -63,6 +67,11 @@
 				this.$u.route({
 								url: 'pages/index/index',
 								type: 'tab'
+							})
+			},
+			async register(){
+				this.$u.route({
+								url: 'pages/register/register',
 							})
 			}
 		},

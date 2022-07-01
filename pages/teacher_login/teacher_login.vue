@@ -2,7 +2,7 @@
 	<view v-if="!isLogin" class="login">
 		
 		<view style="width:300rpx;margin-top:15%;margin-bottom:50rpx;">
-			<u-image width="100%" height="300rpx" src="/static/teacher.png" shape="circle"></u-image>
+			<u-image width="100%" height="300rpx" src="/static/teacher1.png" shape="circle"></u-image>
 		</view>
 		
 		<u-form style="width:90%;background-color: #FFFFFF;padding:0 20rpx;">
@@ -45,7 +45,7 @@
 		},
 		methods: {
 			async login(){
-				console.log(this.loginUser);
+				console.log(this.loginTeacher);
 				await this.$u.post('/teacher_user/login',this.loginTeacher);
 				//到这里一定成功
 				uni.setStorageSync("isLogin",true)//在客户端存储信息，结构式键值对
@@ -65,6 +65,11 @@
 								type: 'tab'
 							})
 			}
+		},
+		async register(){
+			this.$u.route({
+							url: 'pages/teacher_register/teacher_register',
+						})
 		},
 		onShow(){
 			this.isLogin = uni.getStorageSync("isLogin");
