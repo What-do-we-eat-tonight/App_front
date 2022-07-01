@@ -2,7 +2,6 @@
 	<view class="classlist">
 		<!-- clearabled 清除控件 -- 当输入框有内容时用于一键清除 -->
 		<!-- :show-action="false"  无右侧控件 -->
-		
 		<u-search placeholder="计算机组成结构" shape="square" :clearabled="true" 
 				  :show-action="false" border-color="#7A7E83" margin="20rpx " 
 				  @change="text" @search="text"></u-search>
