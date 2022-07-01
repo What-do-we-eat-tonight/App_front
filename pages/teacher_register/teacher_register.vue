@@ -13,7 +13,7 @@
 				<u-input v-model="regTeacher.teacher_name"  placeholder="请输入姓名"  />
 			</u-form-item>
 			<u-form-item>
-				<u-input v-model="regTeacher.email"  placeholder="请输入邮箱"   />
+				<u-input v-model="regTeacher.email"  placeholder="请输入邮箱test"   />
 			</u-form-item>
 			<u-form-item>
 				<u-input v-model="regTeacher.password" type='password' placeholder="请输入密码" :password-icon="true"  />
