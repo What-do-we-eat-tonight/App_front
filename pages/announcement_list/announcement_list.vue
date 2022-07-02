@@ -1,17 +1,22 @@
 <template>
 	<view class="index">
-		<u-button @click="test">江湖</u-button>
+		<!-- u-navbar 自定义导航栏内容 -->
+		<!-- 在pages.json文件中修改对应的style -->
+		<!-- 课程的公告栏 -->
+		<u-navbar back-text="返回" title="课程公告" @click="toback" index="back"></u-navbar>
+		
 		<view v-for="(item,idx) in announcement_list" :key="idx" class="announcement">
-			<view class="content">公告内容为：{{item.content}}</view>
-			<u-row gutter="16">
-				<u-col span="6">
-					<view class="teacher_name">教师编号：{{item.tno}}</view>
+			<view class="content_title">公告内容为：</view>
+			<view class="content">{{item.content}}</view>
+			<u-row gutter="66">
+				<u-col span="66">
+					<view class="teacher_no">教师编号：{{item.tno}}</view>
 				</u-col>
-				<u-col span="6">
-					<view class="class_name">课程编号：{{item.cno}}</view>
+				<u-col span="66">
+					<view class="class_no">课程编号：{{item.cno}}</view>
 				</u-col>
 			</u-row>
-			<u-button @click="get" class="getclick">确认收到</u-button>
+			<u-button class="getclick">确认收到</u-button>
 		</view>
 	</view>
 </template>
@@ -20,14 +25,11 @@
 	export default {
 		data() {
 			return {
-				login_id:'000111',
 				title: 'Hello',
 				c:{
-					cno:'003',
+					cno:'',
 				},
-				announcement_list:[
-					
-				],
+				announcement_list:[],
 			}
 		},
 		//生命周期方法，表示页面正在加载还未显示之前执行的逻辑。
@@ -35,23 +37,22 @@
 			//this.getMealList();
 		},
 		methods: {
-			/*
-			//获得餐品清单
-			//方法为异步，则内部请求可以实现同步化
-			async getMealList(){
-				//加await 异步请求同步化
-				this.meallist = await this.$u.get('/meal-list');
-				console.log("======");
-				
-				//this.list = this.meallist.map(item=>({image:this.$u.apiBaseUrl + '/blob/' + item.meal_pic,title:item.meal_name}));
-				
-			}*/
 			async test(){
 				//this.c.cno = uni.getStorageSync("login_id");
-				console.log(this.login_id);
+				this.c.cno = uni.getStorageSync("cno");
 				console.log(this.c);
 				this.announcement_list = await this.$u.post('/student_user/announcement-list',this.c);
+			},
+			async toback(back){
+				console.log('========', back);
+				this.$u.route({
+					url: '/pages/class/class',//修改成“公告”页面地址
+					type: 'to'
+				});
 			}
+		},
+		onShow(){
+			this.test();
 		}
 	}
 </script>
@@ -60,23 +61,39 @@
 	/*scoped 样式仅在本页面有效*/
 	.index{
 		width: 600rpx;
-		height: 400rpx;
+		height: 500rpx;
 		margin: auto;
 	}
 	.announcement{
-		margin: 10rpx auto;
-		width: 80%;
-		height: 180rpx;
+		margin: 60rpx auto auto;
+		width: 100%;
+		height: auto;
 		background-color: white;
 	}
+	
+	.content_title{
+		margin: 10rpx auto;
+		width:90%;
+		font-family:Helvetica;
+		font-size: 1.2rem;
+	}
+	
 	.content{
-		
+		margin: 10rpx auto;
+		width:90%;
+		font-family:Helvetica;
+		font-size: 1.2rem;
+		color: red;
 	}
-	.teacher_name{
-		
+	.teacher_no{
+		margin: 10rpx auto 0rpx;
+		width:100%;
+		height:40rpx;
 	}
-	.class_name{
-		
+	.class_no{
+		margin: 10rpx auto;
+		width:100%;
+		height:40rpx;
 	}
 	.getclick{
 		margin: 10rpx auto;

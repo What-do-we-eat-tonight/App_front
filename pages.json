@@ -5,63 +5,58 @@
 			"style": {
 				"navigationStyle": "custom"
 			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/classlist/classlist",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/teacher_login/teacher_login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/teacher_register/teacher_register",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/announcement_list/announcement_list",
+			"style": {
+				"navigationStyle": "custom", // 隐藏系统导航栏
+				"navigationBarTextStyle": "white" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
+			}
+
+		}, {
+			"path": "pages/class/class",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-        ,{
-            "path" : "pages/login/login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "登录",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/register/register",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/classlist/classlist",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/teacher_login/teacher_login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/teacher_register/teacher_register",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/announcement_list/announcement_list",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/class/class",
+	    ,{
+            "path" : "pages/question/question",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

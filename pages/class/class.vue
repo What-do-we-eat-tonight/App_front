@@ -1,19 +1,15 @@
 <template>
-	<!--
-	课程信息
-	公告栏
-	讨论区
-	评价-->
+	<!--	课程信息	公告栏	讨论区	评价-->
 	<view class="parent">
 		<view class="child">{{class_name}}</view>
 		
 		<u-cell-group>
-			<u-cell-item v-if="!isAnnouncement" @click="toAnnouncement" index="Announcement" title="公告" :arrow="true"
-				arrow-direction="right"></u-cell-item>
-			<u-cell-item v-if="!isForum" @click="toForum" index="Forum" title="讨论区" :arrow="true"
-				arrow-direction="right"></u-cell-item>
-			<u-cell-item v-if="!isJudge" @click="toJudge" index="Judge" title="评价" :arrow="true"
-				arrow-direction="right"></u-cell-item>
+			<u-cell-item v-if="!isAnnouncement" @click="toAnnouncement" index="Announcement" 
+				title="公告" :arrow="true" arrow-direction="right"></u-cell-item>
+			<u-cell-item v-if="!isForum" @click="toForum" index="Forum" 
+				title="讨论区" :arrow="true" arrow-direction="right"></u-cell-item>
+			<u-cell-item v-if="!isJudge" @click="toJudge" index="Judge" 
+				title="评价" :arrow="true" arrow-direction="right"></u-cell-item>
 		</u-cell-group>
 	</view>
 </template>
@@ -26,26 +22,32 @@
 				isForum: false,
 				isJudge: false,
 				c:{
-						cno:'003',
+						cno:'',
 					},
-				announcement_list:[],
-				class_name:'jisuanjizucheng'//修改为调用test()函数，从class list调取课程信息（名称）
+				//参数包括：教师工号、教师姓名、课程号、课程名、公告内容
+				announcement_list:[{}],
+				class_name:''//修改为调用test()函数，从class list调取课程信息（名称）
 			}
 		},
 		
 		methods: {
 			async test(){//访问数据库调取数据并显示
-				//this.c.cno = uni.getStorageSync("login_id");
-				console.log(this.login_id);
-				console.log(this.c);
-				await this.$u.post('/student_user/announcement-list',this.c);
+				//获取课程号
+				this.c.cno = uni.getStorageSync("cno");
+				this.class_name = await uni.getStorageSync("")
+				
+				//获取课程公告列表
+				this.announcement_list = await this.$u.post('/student_user/announcement-list',this.c);
+				
+				//获取课程名称
+				this.class_name = this.announcement_list[1].cname;
+				
 			},
-			
+			//连接至公告页面
 			toAnnouncement(Announcement) {
 				console.log('========', Announcement);
 				this.$u.route({
-					//url:'/pages/Announcement/Announcement',
-					url: '/pages/login/login',//修改成“公告”页面地址
+					url: '/pages/announcement_list/announcement_list',
 					type: 'to'
 				});
 			},
@@ -53,8 +55,7 @@
 			toForum(Forum) {
 				console.log('========', Forum);
 				this.$u.route({
-					//url:'/pages/Forum/Forum',
-					url: '/pages/login/login',//修改成“讨论区”页面地址
+					url: '/pages/question/question',//修改成“讨论区”页面地址
 					type: 'to'
 				});
 			},
@@ -62,13 +63,14 @@
 			toJudge(Judge) {
 				console.log('========', Judge);
 				this.$u.route({
-					//url:'/pages/Judge/Judge',
 					url: '/pages/login/login',//修改成“评价”页面地址
 					type: 'to'
 				});
 			}
 		},
 		onShow() {
+			this.test();
+			
 			this.isAnnouncement = uni.getStorageSync("isAnnouncement");
 			this.isForum = uni.getStorageSync("isForum");
 			this.isJudge = uni.getStorageSync("isJudge");
