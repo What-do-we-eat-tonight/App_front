@@ -4,12 +4,20 @@
 		<view class="child">{{class_name}}</view>
 		
 		<u-cell-group>
-			<u-cell-item v-if="!isAnnouncement" @click="toAnnouncement" index="Announcement" 
-				title="公告" :arrow="true" arrow-direction="right"></u-cell-item>
-			<u-cell-item v-if="!isForum" @click="toForum" index="Forum" 
-				title="讨论区" :arrow="true" arrow-direction="right"></u-cell-item>
-			<u-cell-item v-if="!isJudge" @click="toJudge" index="Judge" 
-				title="评价" :arrow="true" arrow-direction="right"></u-cell-item>
+			<u-cell-item v-if="!isAnnouncement" @click="toAnnouncementlist" index="Announcement" title="公告"
+						:arrow="true" arrow-direction="right">
+				<!-- is-dot:设置徽标的类型为一个圆点；type设置主题,error:红色；offset偏移值 -->
+				<!-- 消息提示 -->
+				<u-badge :is-dot="true" type="error" :offset="[46,80]"></u-badge>
+			</u-cell-item>
+			
+			<u-cell-item v-if="!isForum" @click="toForum" index="Forum" title="讨论区"
+						 :arrow="true" arrow-direction="right">
+			</u-cell-item>
+			
+			<u-cell-item v-if="!isJudge" @click="toJudge" index="Judge" title="评价" 
+						:arrow="true" arrow-direction="right">
+			</u-cell-item>
 		</u-cell-group>
 	</view>
 </template>
@@ -24,7 +32,7 @@
 				c:{
 						cno:'',
 					},
-				//参数包括：教师工号、教师姓名、课程号、课程名、公告内容
+				//参数包括：公告号、教师工号、教师姓名、课程号、课程名、公告内容、公告发布时间
 				announcement_list:[{}],
 				class_name:''//修改为调用test()函数，从class list调取课程信息（名称）
 			}
@@ -36,15 +44,15 @@
 				this.c.cno = uni.getStorageSync("cno");
 				this.class_name = await uni.getStorageSync("")
 				
-				//获取课程公告列表
+				//获取课程公告列表并将课程公告列表存储至本地
 				this.announcement_list = await this.$u.post('/student_user/announcement-list',this.c);
+				
 				
 				//获取课程名称
 				this.class_name = this.announcement_list[1].cname;
-				
 			},
 			//连接至公告页面
-			toAnnouncement(Announcement) {
+			toAnnouncementlist(Announcement) {
 				console.log('========', Announcement);
 				this.$u.route({
 					url: '/pages/announcement_list/announcement_list',
@@ -63,7 +71,7 @@
 			toJudge(Judge) {
 				console.log('========', Judge);
 				this.$u.route({
-					url: '/pages/evaluation/evaluation',//修改成“评价”页面地址
+					url: '/pages/login/login',//修改成“评价”页面地址
 					type: 'to'
 				});
 			}
