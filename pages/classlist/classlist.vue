@@ -13,7 +13,7 @@
 			<uni-collapse  :accordion="true">
 				<uni-collapse-item :title="item.c_name">
 					<u-cell-item :arrow="false" icon="integral-fill" :title="item.c_name" 
-					:label="'星期'+item.dayOfWeek+'第'+item.section+'节'" @click="test(item.c_no)"/>
+					:label="item.time" @click="test(item.c_no)"/>
 				</uni-collapse-item>
 			</uni-collapse>
 		</view>
@@ -40,7 +40,7 @@
 			},
 			//async使得login方法为异步，则内部请求可以实现同步化
 			async postlist(){ 
-				this.courselist = await this.$u.post('/student_user/CourseTable', this.s);
+				this.courselist = await this.$u.post('/student_user/NewCourseTable', this.s);
 				console.log(this.courselist);
 			},
 			async test(cno){
