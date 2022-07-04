@@ -54,8 +54,13 @@
 				"enablePullDownRefresh": false
 			}
 
-		}
-	    ,{
+		}, {
+			"path":"pages/evaluation/evaluation",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}, {
             "path" : "pages/question/question",
             "style" :                                                                                    
             {
@@ -63,8 +68,7 @@
                 "enablePullDownRefresh": false
             }
             
-        }
-        ,{
+        }, {
             "path" : "pages/mine/mine",
             "style" :                                                                                    
             {
@@ -86,15 +90,16 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/index/index",
-			"iconPath": "static/home.svg",
-			"selectedIconPath": "static/home_select.svg",
-			"text": "首页"
-		}, {
 			"pagePath": "pages/login/login",
 			"iconPath": "static/order.svg",
 			"selectedIconPath": "static/order_select.svg",
 			"text": "登录"
+		},
+		{
+			"pagePath": "pages/classlist/classlist",
+			"iconPath": "static/order.svg",
+			"selectedIconPath": "static/order_select.svg",
+			"text": "课表"
 		},
 		{
 			"pagePath": "pages/mine/mine",
