@@ -8,7 +8,7 @@
 		<view v-for="(item,idx) in announcement_list" :key="idx" class="announcement">
 			<view class="content_title">公告内容为：</view>
 			<view class="content">{{item.content}}</view>
-			<u-row gutter="66">
+			<u-row gutter="66">//这部分可以改得更好看
 				<u-col span="66">
 					<view class="teacher_no">教师编号：{{item.tno}}</view>
 				</u-col>
