@@ -12,8 +12,8 @@
 			<!-- uni-collapse 用于展示手风琴效果 -->
 			<uni-collapse  :accordion="true">
 				<uni-collapse-item :title="item.c_name">
-					<u-cell-item :arrow="false" icon="integral-fill" :title="item.c_name" :label="item.dayOfWeek"
-								 :value="item.section"  @click="test(item.c_no)"/>
+					<u-cell-item :arrow="false" icon="integral-fill" :title="item.c_name" 
+					:label="'星期'+item.dayOfWeek+'第'+item.section+'节'" @click="test(item.c_no)"/>
 				</uni-collapse-item>
 			</uni-collapse>
 		</view>
@@ -30,14 +30,13 @@
 				s: {
 					sno: ''
 				},
+				text:''
 			}
 		},
 		methods: {
 			//从本地缓存中获取该生的学号
 			async getid() {
 				this.s.sno = uni.getStorageSync("login_id");
-				//用以测试学号是否已经成功从本地缓存中获取
-				//console.log(this.s.sno); 
 			},
 			//async使得login方法为异步，则内部请求可以实现同步化
 			async postlist(){ 
