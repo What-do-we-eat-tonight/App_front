@@ -64,7 +64,15 @@
             }
             
         }
-        ,
+        ,{
+            "path" : "pages/mine/mine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -87,6 +95,12 @@
 			"iconPath": "static/order.svg",
 			"selectedIconPath": "static/order_select.svg",
 			"text": "登录"
+		},
+		{
+			"pagePath": "pages/mine/mine",
+			"iconPath": "static/order.svg",
+			"selectedIconPath": "static/order_select.svg",
+			"text": "我的"
 		}]
 	}
 }

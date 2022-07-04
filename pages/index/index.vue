@@ -29,17 +29,20 @@
 	export default {
 	  data(){
 	    return{
-	      msg: ''
+	      msg: '',
+		  login_type: false,
 	    }
 	  },
 	  methods: {
-	    jumpS(){
+	    async jumpS(){
+		uni.setStorageSync("login_type",false)
 	    this.$u.route({
 	    				url: 'pages/login/login',
 						type: 'tab'
 	    			})
 	    },
-		jumpT(){
+		async jumpT(){
+		uni.setStorageSync("login_type",true)
 	    this.$u.route({
 	    				url: 'pages/teacher_login/teacher_login',
 	    			})
