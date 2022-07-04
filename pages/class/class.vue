@@ -63,7 +63,7 @@
 			toJudge(Judge) {
 				console.log('========', Judge);
 				this.$u.route({
-					url: '/pages/login/login',//修改成“评价”页面地址
+					url: '/pages/evaluation/evaluation',//修改成“评价”页面地址
 					type: 'to'
 				});
 			}

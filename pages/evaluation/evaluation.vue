@@ -31,10 +31,8 @@
 			async getitems(){
 				//console.log("----------");
 				let test = {
-					//sno:this.getStorageSync("sno"),
-					//cno:this.getStorageSync("cno"),
-					sno:"2194111002",
-					cno:"COMP122301"
+					sno:uni.getStorageSync("login_id"),
+					cno:uni.getStorageSync("cno")
 				};
 				await this.$u.post('/student_user/evaluation',test).then((res)=> {
 					this.items = res
@@ -44,10 +42,8 @@
 			},
 			async send(){
 				let put_evaluation_info = {
-					//sno:this.getStorageSync("sno"),
-					//cno:this.getStorageSync("cno"),
-					sno:"2194111002",
-					cno:"COMP122301",
+					sno:uni.getStorageSync("login_id"),
+					cno:uni.getStorageSync("cno"),
 					evaluation_text:this.value,
 					count:1
 				};
