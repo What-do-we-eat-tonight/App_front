@@ -6,7 +6,7 @@
 		<u-search placeholder="计算机组成结构" shape="square" :clearabled="true" 
 				  :show-action="false" border-color="#7A7E83" margin="20rpx " 
 				  @change="text" @search="text"></u-search>
-				  
+				<u-button>确定收到</u-button>  
 		<!-- v-for 用于循环渲染 -->
 		<view v-for="(item,idx) in courselist" :key="idx">
 			<!-- uni-collapse 用于展示手风琴效果 -->
