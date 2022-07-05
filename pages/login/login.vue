@@ -57,6 +57,7 @@
 				this.$u.toast('登陆成功!');
 				this.$u.route({
 								url: 'pages/classlist/classlist',
+								type: 'tab'
 							})
 			},
 			async logout(){
@@ -66,7 +67,6 @@
 				this.$u.toast('退出登录成功!');
 				this.$u.route({
 								url: 'pages/index/index',
-								type: 'tab'
 							})
 			},
 			async register(){
