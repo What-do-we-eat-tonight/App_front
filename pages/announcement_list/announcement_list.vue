@@ -22,7 +22,8 @@
 						<!-- 时间右对齐 -->
 						{{item.submit_time}}
 						<!-- 确认收到按钮 -->
-						<u-button type="info" class="content" @click="to_state(idx)">确定收到</u-button>
+						<u-button type="info" class="content" @click="get_it1(idx)" v-if = "is_state == false">确定收到</u-button>
+						<u-button type="info" class="content" @click="get_it2(idx)" v-else-if = "is_state == true">已经收到</u-button>
 					</u-cell-item>
 				</uni-collapse-item>
 			</uni-collapse>
@@ -65,9 +66,16 @@
 				this.announcement_list = await this.$u.post('/student_user/announcement-list', this.c);
 			},
 			//修改公告状态
-			to_state(idx) {
+			git_it2(idx) {
 				this.announcement_list[idx].state = true;
 
+				if (this.announcement_list[idx].state) {
+					console.log("===================");
+				}
+			},
+			get_it1(idx) {
+				this.announcement_list[idx].state = true;
+				this.is_state = !this.is_state;
 				if (this.announcement_list[idx].state) {
 					console.log("===================");
 				}
