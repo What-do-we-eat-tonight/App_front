@@ -43,8 +43,17 @@
 		}, {
 			"path": "pages/announcement_list/announcement_list",
 			"style": {
-				"navigationStyle": "custom", // 隐藏系统导航栏
-				"navigationBarTextStyle": "white" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
+				"navigationBarTitleText": "课程公告",
+				"enablePullDownRefresh": false,
+				"h5": {
+					"titleNView": {
+						"buttons": [{
+							"text": "添加公告",
+							"fontSize": "26rpx",
+							"color": "#888888"
+						}]
+					}
+				}
 			}
 
 		}, {
@@ -55,12 +64,30 @@
 			}
 
 		}, {
-			"path":"pages/evaluation/evaluation",
+			"path": "pages/evaluation/evaluation",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 		}
+	    ,{
+            "path" : "pages/add_announcement/add_announcement",
+            "style" :                                                                                    
+            {
+				"navigationBarTitleText": "添加公告",
+				"enablePullDownRefresh": false,
+				"h5": {
+					"titleNView": {
+						"buttons": [{
+							// "text": "添加",
+							"fontSize": "26rpx",
+							"color": "#888888"
+						}]
+					}
+				}
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -74,22 +101,23 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/login/login",
-			"iconPath": "static/order.svg",
-			"selectedIconPath": "static/order_select.svg",
-			"text": "登录"
-		},
-		{
-			"pagePath": "pages/classlist/classlist",
-			"iconPath": "static/order.svg",
-			"selectedIconPath": "static/order_select.svg",
-			"text": "课表"
-		},
-		{
-			"pagePath": "pages/mine/mine",
-			"iconPath": "static/order.svg",
-			"selectedIconPath": "static/order_select.svg",
-			"text": "我的"
-		}]
+				"pagePath": "pages/login/login",
+				"iconPath": "static/order.svg",
+				"selectedIconPath": "static/order_select.svg",
+				"text": "登录"
+			},
+			{
+				"pagePath": "pages/classlist/classlist",
+				"iconPath": "static/order.svg",
+				"selectedIconPath": "static/order_select.svg",
+				"text": "课表"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/order.svg",
+				"selectedIconPath": "static/order_select.svg",
+				"text": "我的"
+			}
+		]
 	}
 }
