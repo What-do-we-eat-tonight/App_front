@@ -60,7 +60,26 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
+		},{
+			"path":"pages/forum/forum",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/question",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/answer",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 		}
+		
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -63,7 +63,7 @@
 			toForum(Forum) {
 				console.log('========', Forum);
 				this.$u.route({
-					url: '/pages/question/question',//修改成“讨论区”页面地址
+					url: '/pages/forum/question',//修改成“讨论区”页面地址
 					type: 'to'
 				});
 			},
@@ -71,7 +71,7 @@
 			toJudge(Judge) {
 				console.log('========', Judge);
 				this.$u.route({
-					url: '/pages/login/login',//修改成“评价”页面地址
+					url: '/pages/evaluation/evaluation',//修改成“评价”页面地址
 					type: 'to'
 				});
 			}
