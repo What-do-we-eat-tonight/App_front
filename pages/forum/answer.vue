@@ -28,7 +28,7 @@
 							<uni-icons type="heart-filled" size="18" color="#ff0000" @click="dislike_it()" v-else></uni-icons>
 							<text class="card-actions-item-text">{{ans2.like_num}}</text>
 						</view>
-						<view class="card-actions-item" @click="comment2(ans2.user_name, ans2.answer_num)">
+						<view class="card-actions-item" @click="comment2(ans2.user_name, ans.answer_num)">
 							<uni-icons type="chatbubble" size="18" color="#999"></uni-icons>
 							<text class="card-actions-item-text">评论</text>
 						</view>
@@ -142,7 +142,7 @@
 			async like_it1(num, index){
 				//点赞
 				this.answers[index].hasliked = true;
-	
+				this.answers[index].like_num++;
 				let like_ans1_post = {
 					sequence_num:num,
 					sno:uni.getStorageSync('login_id')
@@ -153,7 +153,7 @@
 			},
 			async like_it2(num, index1, index2){
 				this.answers[index1].answer2s[index2].hasliked = true;
-				
+				this.answers[index1].answer2s[index2].like_num ++;
 		
 				let like_ans2_post = {
 					sequence_num:num,
@@ -168,8 +168,10 @@
 			},
 			async getAnswers(){
 				let test = {
-					question_num1:uni.getStorageSync("q_num")
+					question_num1:uni.getStorageSync("q_num"),
+					user_id:uni.getStorageSync('login_id')
 				};
+				console.log(test);
 				await this.$u.post('student_user/getanswer',test).then((res)=>{
 					this.answers = res;
 				});

@@ -1,5 +1,5 @@
 <template>
-	<uni-card  :title='"用户名"+" 提问"' :sub-title="ques.q_user" :extra='ques.q_time' :thumbnail="ques_avatar" v-for = "(ques, index) in questions">
+	<uni-card  :title='ques.q_name+" 提问"' :sub-title="ques.q_user" :extra='ques.q_time' :thumbnail="ques_avatar" v-for = "(ques, index) in questions">
 		<text class="uni-body">{{ques.q_con}}</text>
 		<view slot="actions" class="card-actions">
 			<view class="card-actions-item" >
@@ -80,6 +80,7 @@
 			},
 			to_answer(q_num){
 				uni.setStorageSync("q_num", q_num);
+				
 				this.$u.route({
 								url: 'pages/forum/answer',
 								type: 'to'
