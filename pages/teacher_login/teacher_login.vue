@@ -49,10 +49,11 @@
 				await this.$u.post('/teacher_user/login',this.loginTeacher);
 				//到这里一定成功
 				uni.setStorageSync("isLogin",true)//在客户端存储信息，结构式键值对
+				uni.setStorageSync('login_id',this.loginTeacher.teacher_id);
 				this.$u.toast('登陆成功!');
 				this.$u.route({
-								url: 'pages/index/index',
-								type: 'tab'
+								url: 'pages/teacher_classlist/teacher_classlist',
+								type: 'to'
 							})
 			},
 			async logout(){
@@ -62,7 +63,7 @@
 				this.$u.toast('退出登录成功!');
 				this.$u.route({
 								url: 'pages/index/index',
-								type: 'tab'
+								type: 'to'
 							})
 			}
 		},

@@ -60,6 +60,24 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
+		}, {
+			"path":"pages/evaluation/evaluation_teacher",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/answer_teacher",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/question_teacher",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
 		},{
 			"path":"pages/forum/forum",
 			"style": {
@@ -78,7 +96,60 @@
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-		}
+		}	    ,{
+            "path" : "pages/add_announcement/add_announcement",
+            "style" :                                                                                    
+            {
+				"navigationBarTitleText": "添加公告",
+				"enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/test/test",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/teacher_classlist/teacher_classlist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/teacher_class/teacher_class",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "课程详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/teacher_announcement/teacher_announcement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "课程公告",
+                "enablePullDownRefresh": false,
+				"h5": {
+					"titleNView": {
+						"buttons": [{
+							"text": "添加公告",
+							"fontSize": "26rpx",
+							"color": "#888888"
+						}]
+					}
+				}
+            }
+            
+        }
 		
     ],
 	"globalStyle": {

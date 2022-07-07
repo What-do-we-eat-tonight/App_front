@@ -151,10 +151,10 @@
 				this.answers[index].like_num++;
 				let like_ans1_post = {
 					sequence_num:num,
-					sno:uni.getStorageSync('login_id')
+					tno:uni.getStorageSync('login_id')
 				};
 				console.log(like_ans1_post);
-				await this.$u.post('student_user/answer_thumbs',like_ans1_post);
+				await this.$u.post('teacher_user/answer_thumbs',like_ans1_post);
 				this.$u.toast('点赞成功');
 			},
 			async like_it2(num, index1, index2){
@@ -163,9 +163,9 @@
 		
 				let like_ans2_post = {
 					sequence_num:num,
-					sno:uni.getStorageSync('login_id')
+					tno:uni.getStorageSync('login_id')
 				};
-				await this.$u.post('student_user/answer2_thumbs',like_ans2_post);
+				await this.$u.post('teacher_user/answer2_thumbs',like_ans2_post);
 				this.$u.toast('点赞成功');
 			},
 			async dislike_it(){

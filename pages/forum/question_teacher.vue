@@ -1,5 +1,8 @@
 <template>
 	<uni-card  :title='ques.q_name+" 提问"' :sub-title="ques.q_user" :extra='ques.q_time' :thumbnail="ques_avatar" v-for = "(ques, index) in questions">
+		<view class="tag-view">
+			<uni-tag text="老师提问" type="primary" :circle="true" v-if = "ques.q_user[0] == '1'"/>
+		</view>
 		<text class="uni-body">{{ques.q_con}}</text>
 		<view slot="actions" class="card-actions">
 			<view class="card-actions-item" >
@@ -67,9 +70,9 @@
 				// question_thumbs
 				let like_ques_post = {
 					sequence_num:ques_id,
-					sno:uni.getStorageSync('login_id')
+					tno:uni.getStorageSync('login_id')
 				};
-				await this.$u.post('student_user/question_thumbs',like_ques_post);
+				await this.$u.post('teacher_user/question_thumbs',like_ques_post);
 				this.$u.toast('点赞成功');
 			},
 			async dislike_it(ques_id, index){
@@ -82,7 +85,7 @@
 				uni.setStorageSync("q_num", q_num);
 				
 				this.$u.route({
-								url: 'pages/forum/answer',
+								url: 'pages/forum/answer_teacher',
 								type: 'to'
 							})
 			}
