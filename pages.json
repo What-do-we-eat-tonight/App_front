@@ -43,17 +43,8 @@
 		}, {
 			"path": "pages/announcement_list/announcement_list",
 			"style": {
-				"navigationBarTitleText": "课程公告",
-				"enablePullDownRefresh": false,
-				"h5": {
-					"titleNView": {
-						"buttons": [{
-							"text": "添加公告",
-							"fontSize": "26rpx",
-							"color": "#888888"
-						}]
-					}
-				}
+				"navigationStyle": "custom", // 隐藏系统导航栏
+				"navigationBarTextStyle": "white" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
 			}
 
 		}, {
@@ -64,22 +55,99 @@
 			}
 
 		}, {
-			"path": "pages/evaluation/evaluation",
+			"path":"pages/evaluation/evaluation",
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
-		}
-	    ,{
+		}, {
+			"path":"pages/evaluation/evaluation_teacher",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/answer_teacher",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/question_teacher",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/forum",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/question",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
+			"path":"pages/forum/answer",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		}	    ,{
             "path" : "pages/add_announcement/add_announcement",
             "style" :                                                                                    
             {
 				"navigationBarTitleText": "添加公告",
-				"enablePullDownRefresh": false,
+				"enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/test/test",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/teacher_classlist/teacher_classlist",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/teacher_class/teacher_class",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "课程详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/teacher_announcement/teacher_announcement",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "课程公告",
+                "enablePullDownRefresh": false,
 				"h5": {
 					"titleNView": {
 						"buttons": [{
-							// "text": "添加",
+							"text": "添加公告",
 							"fontSize": "26rpx",
 							"color": "#888888"
 						}]
@@ -88,6 +156,7 @@
             }
             
         }
+		
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -100,24 +169,18 @@
 		"selectedColor": "#3cc51f",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"list": [{
-				"pagePath": "pages/login/login",
-				"iconPath": "static/order.svg",
-				"selectedIconPath": "static/order_select.svg",
-				"text": "登录"
-			},
-			{
-				"pagePath": "pages/classlist/classlist",
-				"iconPath": "static/order.svg",
-				"selectedIconPath": "static/order_select.svg",
-				"text": "课表"
-			},
-			{
-				"pagePath": "pages/mine/mine",
-				"iconPath": "static/order.svg",
-				"selectedIconPath": "static/order_select.svg",
-				"text": "我的"
-			}
-		]
+		"list": [
+		{
+			"pagePath": "pages/classlist/classlist",
+			"iconPath": "static/order.svg",
+			"selectedIconPath": "static/order_select.svg",
+			"text": "课表"
+		},
+		{
+			"pagePath": "pages/mine/mine",
+			"iconPath": "static/order.svg",
+			"selectedIconPath": "static/order_select.svg",
+			"text": "我的"
+		}]
 	}
 }
