@@ -63,7 +63,7 @@
 			async getid() {
 				//登陆者是老师，则获取其工号
 				if(this.is_teacher){
-					this.t.teacher_id = uni.getStorageSync("t_id");
+					this.t.teacher_id = uni.getStorageSync("login_id");
 					console.log(this.t);
 				}
 				//登陆者是学生，则获取其学号
@@ -92,8 +92,8 @@
 							})
 			},
 			async t_test(c_no,c_name){
-				uni.setStorageSync("c_no",c_no),//在客户端存储信息，结构式键值对
-				uni.setStorageSync("c_name",c_name),
+				uni.setStorageSync("cno",c_no),//在客户端存储信息，结构式键值对
+				uni.setStorageSync("cname",c_name),
 				this.$u.route({
 								url: 'pages/teacher_class/teacher_class',
 							})

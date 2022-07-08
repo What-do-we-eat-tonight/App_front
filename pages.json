@@ -67,6 +67,12 @@
 				"enablePullDownRefresh": false
 			}
 		},{
+			"path":"pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},{
 			"path":"pages/forum/answer_teacher",
 			"style": {
 				"navigationBarTitleText": "",
@@ -163,12 +169,7 @@
 		"selectedColor": "#3cc51f",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"list": [{
-			"pagePath": "pages/login/login",
-			"iconPath": "static/order.svg",
-			"selectedIconPath": "static/order_select.svg",
-			"text": "登录"
-		},
+		"list": [
 		{
 			"pagePath": "pages/classlist/classlist",
 			"iconPath": "static/order.svg",

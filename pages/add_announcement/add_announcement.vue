@@ -1,7 +1,5 @@
 <template>
 	<view class="register">
-		
-		
 		<u-form style="width:90%;background-color: #FFFFFF;padding:0 20rpx;">
 			<u-form-item >
 				<u-input v-model="addannouncement.tno"  placeholder="请输入您的账号" />
@@ -13,11 +11,8 @@
 				<u-input v-model="addannouncement.content"  placeholder="请输入公告内容"  />
 			</u-form-item>
 		</u-form>
-		
 			<u-button @click="add" style="width:30%;margin-top:5%;" :ripple="true"  type="primary">确认添加</u-button>
-		
 	</view>
-	
 </template>
 
 <script>
@@ -34,7 +29,7 @@
 		methods: {
 			async add(){
 				console.log(this.addannouncement);
-				await this.$u.post('/teacher_user/announcement-list',this.addannouncement);
+				await this.$u.post('/teacher_user/insert-announcement',this.addannouncement);
 				//到这里一定成功
 				this.$u.toast('添加成功!');
 				this.$u.route({
@@ -42,9 +37,6 @@
 								type: 'to'
 							})
 			},
-		},
-		onShow(){
-			
 		}
 	}
 </script>

@@ -53,9 +53,10 @@
 			},
 			async getQuestions(){
 				let test = {
-					cno:'COMP1221',
+					cno:uni.getStorageSync("cno"),
 					user_id:uni.getStorageSync("login_id")
 				};
+				console.log(test);
 				await this.$u.post('student_user/GetQuestion',test).then((res)=>{
 					this.questions = res;
 					this.like_ques.push({});

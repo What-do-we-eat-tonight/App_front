@@ -38,8 +38,8 @@
 		methods: {
 			//获取课程号及课程名称
 			async get_message(){
-				this.c.c_no = uni.getStorageSync("c_no");
-				this.class_name = uni.getStorageSync("c_name");
+				this.c.c_no = uni.getStorageSync("cno");
+				this.class_name = uni.getStorageSync("cname");
 				console.log(this.c);
 				console.log(this.class_name);
 			},

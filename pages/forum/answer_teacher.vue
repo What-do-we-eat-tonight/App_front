@@ -149,6 +149,7 @@
 				//点赞
 				this.answers[index].hasliked = true;
 				this.answers[index].like_num++;
+				this.answers[index].teacher_like = true;
 				let like_ans1_post = {
 					sequence_num:num,
 					tno:uni.getStorageSync('login_id')
@@ -160,7 +161,7 @@
 			async like_it2(num, index1, index2){
 				this.answers[index1].answer2s[index2].hasliked = true;
 				this.answers[index1].answer2s[index2].like_num ++;
-		
+				this.answers[index1].answer2s[index2].teacher_like = true;
 				let like_ans2_post = {
 					sequence_num:num,
 					tno:uni.getStorageSync('login_id')

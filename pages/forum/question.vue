@@ -1,5 +1,8 @@
 <template>
 	<uni-card  :title='ques.q_name+" 提问"' :sub-title="ques.q_user" :extra='ques.q_time' :thumbnail="ques_avatar" v-for = "(ques, index) in questions">
+		<view class="tag-view">
+			<uni-tag text="老师提问" type="primary" :circle="true" v-if = "ques.q_user[0] == '1'"/>
+		</view>
 		<text class="uni-body">{{ques.q_con}}</text>
 		<view slot="actions" class="card-actions">
 			<view class="card-actions-item" >
@@ -50,9 +53,10 @@
 			},
 			async getQuestions(){
 				let test = {
-					cno:'COMP1221',
+					cno:uni.getStorageSync('cno'),
 					user_id:uni.getStorageSync("login_id")
 				};
+				console.log(test);
 				await this.$u.post('student_user/GetQuestion',test).then((res)=>{
 					this.questions = res;
 					this.like_ques.push({});
@@ -63,7 +67,7 @@
 			async like_it(ques_id, index){
 				//this.like_ques[index] = !this.like_ques[index];
 				this.questions[index].hasliked = true;
-				
+				this.questions[index].q_like ++;
 				// question_thumbs
 				let like_ques_post = {
 					sequence_num:ques_id,

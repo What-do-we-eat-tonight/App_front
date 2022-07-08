@@ -38,7 +38,6 @@
 		uni.setStorageSync("login_type",false)
 	    this.$u.route({
 	    				url: 'pages/login/login',
-						type: 'tab'
 	    			})
 	    },
 		async jumpT(){

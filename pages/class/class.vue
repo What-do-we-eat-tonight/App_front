@@ -1,7 +1,7 @@
 <template>
 	<!--	课程信息	公告栏	讨论区	评价-->
 	<view class="parent">
-		<view class="child">{{class_name}}</view>
+		<view class="title">{{class_name}}</view>
 		
 		<u-cell-group>
 			<u-cell-item v-if="!isAnnouncement" @click="toAnnouncementlist" index="Announcement" title="公告"
@@ -94,9 +94,10 @@
 		padding: 100rpx 5rpx;
 		margin: auto;
 	}
-	.child{
-		height: 150px;
+	.title{
+		height: 100px;
 		width: 150px;
 		margin: auto;
+		font-size: 1.2rem;
 	}
 </style>

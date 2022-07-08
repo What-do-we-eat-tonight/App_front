@@ -17,7 +17,7 @@
 						<!-- 时间右对齐 -->
 						{{item.submit_time}}
 						<!-- 查看已收到的人数 -->
-						<u-button type="info" class="content" >已确定收到的人数为{{item.ifConfirm}}</u-button>
+						<u-button type="info" class="content" >已确定收到的人数为：{{item.confirmNum}}</u-button>
 					</u-cell-item>
 				</uni-collapse-item>
 			</uni-collapse>
@@ -47,13 +47,12 @@
 			//获取课程公告列表
 			async test() {
 				//获取课程号
-				this.c.sno = uni.getStorageSync("login_id");
-				//获取课程号
 				this.c.cno = uni.getStorageSync("cno");
 				//获取课程公告列表
 				//列表内容：ano,cname,cno,content,ifconfirm,submit_time,tname,tno
+				//console.log(this.c);
 				this.announcement_list = await this.$u.post('/student_user/announcement-list', this.c);
-				console.log(this.announcement_list);
+				//console.log(this.announcement_list);
 			},
 			//截取公告第一分句作为公告标题
 			get_title(content) {
