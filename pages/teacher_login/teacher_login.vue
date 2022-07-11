@@ -52,7 +52,7 @@
 				//到这里一定成功
 
 				uni.setStorageSync("isLogin", true) //在客户端存储信息，结构式键值对
-				uni.setStorageSync("t_id", this.loginTeacher.teacher_id) //在客户端存储信息，结构式键值对
+				uni.setStorageSync("login_id", this.loginTeacher.teacher_id) //在客户端存储信息，结构式键值对
 				uni.setStorageSync("is_t", true)
 
 				// this.t_id2 = uni.getStorageSync("t_id");

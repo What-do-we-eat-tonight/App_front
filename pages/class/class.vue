@@ -48,7 +48,7 @@
 				
 				
 				//获取课程名称
-				this.class_name = this.announcement_list[1].cname;
+				this.class_name = this.announcement_list[0].cname;
 			},
 			//连接至公告页面
 			toAnnouncementlist(Announcement) {
