@@ -38,6 +38,7 @@
 			return {
 				login_id:'',//存储学生的学号
 				login_id2:'',
+				is_t: false, //是否是教师
 				isLogin:false,//存储登录状态
 				loginUser:{
 					u_id:'',
@@ -52,6 +53,8 @@
 				//到这里一定成功
 				uni.setStorageSync("isLogin",true)//在客户端存储信息，结构式键值对
 				uni.setStorageSync("login_id",this.loginUser.u_id)//在客户端存储信息，结构式键值对
+				uni.setStorageSync("is_t", false)
+				console.log(this.is_t)
 				// this.login_id2 = uni.getStorageSync("login_id");
 				// console.log('the login id is'+this.login_id2);
 				this.$u.toast('登陆成功!');
@@ -61,9 +64,10 @@
 							})
 			},
 			async logout(){
-				console.log(this.loginUser);
-				uni.setStorageSync("isLogin",false)//在客户端存储信息，结构式键值对
-				console.log("isLogin is " + this.isLogin);
+				uni.setStorageSync("is_t",false)
+				uni.setStorageSync("isLogin", false) //在客户端存储信息，结构式键值对
+				
+				uni.clearStorageSync();
 				this.$u.toast('退出登录成功!');
 				this.$u.route({
 								url: 'pages/index/index',
