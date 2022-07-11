@@ -1,6 +1,6 @@
 <template>
 	<view v-if="!isLogin" class="login">
-		<u-navbar back-text="返回" title="剑未配妥，出门已是江湖"></u-navbar>
+		
 		<view style="width:300rpx;margin-top:15%;margin-bottom:50rpx;">
 			<u-image width="100%" height="300rpx" src="/static/student1.png" shape="circle"></u-image>
 		</view>
@@ -24,6 +24,11 @@
 				</u-col>
 			</u-row>
 		</view>
+		
+	</view>
+	
+	<view v-if="isLogin" style="margin-top:5%;margin-bottom:50rpx;">
+		<u-button @click="logout" style="width:30%;" :ripple="true"  type="primary">退出登录</u-button>
 	</view>
 </template>
 
@@ -31,9 +36,9 @@
 	export default {
 		data() {
 			return {
-				s_id:'',
-				is_t:false,
-				isLogin:false,
+				login_id:'',//存储学生的学号
+				login_id2:'',
+				isLogin:false,//存储登录状态
 				loginUser:{
 					u_id:'',
 					u_pwd:''
@@ -47,19 +52,24 @@
 				//到这里一定成功
 				uni.setStorageSync("isLogin",true)//在客户端存储信息，结构式键值对
 				uni.setStorageSync("login_id",this.loginUser.u_id)//在客户端存储信息，结构式键值对
-				uni.setStorageSync("is_t",false);
-				console.log("老师：",this.is_t);
-				
-				this.s_id2 = uni.getStorageSync("s_id");
-				console.log('the s_id is'+this.s_id2);
-				
+				// this.login_id2 = uni.getStorageSync("login_id");
+				// console.log('the login id is'+this.login_id2);
 				this.$u.toast('登陆成功!');
 				this.$u.route({
 								url: 'pages/classlist/classlist',
 								type: 'tab'
 							})
 			},
-			async register(){
+			async logout(){
+				console.log(this.loginUser);
+				uni.setStorageSync("isLogin",false)//在客户端存储信息，结构式键值对
+				console.log("isLogin is " + this.isLogin);
+				this.$u.toast('退出登录成功!');
+				this.$u.route({
+								url: 'pages/index/index',
+							})
+			},
+			register(){
 				this.$u.route({
 								url: 'pages/register/register',
 							})

@@ -22,14 +22,14 @@
 		}, {
 			"path": "pages/classlist/classlist",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "课程列表",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/teacher_login/teacher_login",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "登录",
 				"enablePullDownRefresh": false
 			}
 
@@ -43,8 +43,8 @@
 		}, {
 			"path": "pages/announcement_list/announcement_list",
 			"style": {
-				"navigationStyle": "custom", // 隐藏系统导航栏
-				"navigationBarTextStyle": "white" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
+				"navigationBarTitleText": "公告详情",
+				"enablePullDownRefresh": false
 			}
 
 		}, {
@@ -69,7 +69,7 @@
 		},{
 			"path":"pages/mine/mine",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的主页",
 				"enablePullDownRefresh": false
 			}
 		},{
