@@ -11,6 +11,7 @@
 		data() {
 			return {
 				isLogin: false,
+				is_t:false,
 				loginTeacher: {
 					teacher_id: '',
 					teacher_pwd: ''
@@ -20,11 +21,13 @@
 		methods: {
 			get_message() {
 				this.isLogin = uni.getStorageSync("isLogin");
+				this.is_t = uni.getStorageSync("is_t");
 				console.log("isLogin=", this.isLogin);
 			},
 			logout() {
+				uni.setStorageSync("is_t",false)
 				uni.setStorageSync("isLogin", false) //在客户端存储信息，结构式键值对
-				console.log("isLogin is " + this.isLogin);
+				
 				this.$u.toast('退出登录成功!');
 				this.$u.route({
 					url: 'pages/index/index'
