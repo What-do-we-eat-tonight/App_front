@@ -50,13 +50,10 @@
 
 				await this.$u.post('/teacher_user/login', this.loginTeacher);
 				//到这里一定成功
-
+				uni.setStorageSync("is_t", true)
 				uni.setStorageSync("isLogin", true) //在客户端存储信息，结构式键值对
 				uni.setStorageSync("login_id", this.loginTeacher.teacher_id) //在客户端存储信息，结构式键值对
-				uni.setStorageSync("is_t", true)
-
-				// this.t_id2 = uni.getStorageSync("t_id");
-				// console.log('the login id is' + this.t_id2);
+				
 
 				this.$u.toast('登陆成功!');
 				this.$u.route({
@@ -65,8 +62,9 @@
 				})
 			},
 			logout() {
+				uni.setStorageSync("is_t",false)
 				uni.setStorageSync("isLogin", false) //在客户端存储信息，结构式键值对
-				console.log("isLogin is " + this.isLogin);
+				
 				this.$u.toast('退出登录成功!');
 				this.$u.route({
 					url: 'pages/index/index'
@@ -79,6 +77,7 @@
 			})
 		},
 		onShow() {
+			this.is_t = uni.getStorageSync("is_t");
 			this.isLogin = uni.getStorageSync("isLogin");
 			console.log("+++++" + this.isLogin);
 		}
