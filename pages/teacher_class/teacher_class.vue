@@ -74,6 +74,16 @@
 			this.isForum = uni.getStorageSync("isForum");
 			this.isJudge = uni.getStorageSync("isJudge");
 		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			this.get_message(),
+			this.isAnnouncement = uni.getStorageSync("isAnnouncement");
+			this.isForum = uni.getStorageSync("isForum");
+			this.isJudge = uni.getStorageSync("isJudge");
+			setTimeout(function () {
+				uni.stopPullDownRefresh();
+			}, 1000);
+		}
 	}
 </script>
 

@@ -59,6 +59,14 @@
 		onShow() {
 			this.getid(),
 			this.postlist()
+		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			this.getid();
+			this.postlist();
+			setTimeout(function () {
+				uni.stopPullDownRefresh();
+			}, 1000);
 		}
 	}
 </script>

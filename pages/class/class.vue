@@ -8,7 +8,7 @@
 						:arrow="true" arrow-direction="right">
 				<!-- is-dot:设置徽标的类型为一个圆点；type设置主题,error:红色；offset偏移值 -->
 				<!-- 消息提示 -->
-				<u-badge :is-dot="true" type="error" :offset="[46,80]"></u-badge>
+				<u-badge :is-dot="true" v-if = "!new_annonce" type="error" :offset="[46,80]"></u-badge>
 			</u-cell-item>
 			
 			<u-cell-item v-if="!isForum" @click="toForum" index="Forum" title="讨论区"
@@ -34,7 +34,9 @@
 					},
 				//参数包括：公告号、教师工号、教师姓名、课程号、课程名、公告内容、公告发布时间
 				announcement_list:[{}],
-				class_name:''//修改为调用test()函数，从class list调取课程信息（名称）
+				class_name:'',//修改为调用test()函数，从class list调取课程信息（名称）
+				new_annonce:false,
+				announcement_state:[]
 			}
 		},
 		
@@ -42,13 +44,26 @@
 			async test(){//访问数据库调取数据并显示
 				//获取课程号
 				this.c.cno = uni.getStorageSync("cno");
-				
+				this.class_name = await uni.getStorageSync("cname")
+				let getan = {
+					sno:uni.getStorageSync("login_id"),
+					cno:uni.getStorageSync('cno')
+				}
 				//获取课程公告列表并将课程公告列表存储至本地
-				this.announcement_list = await this.$u.post('/student_user/announcement-list',this.c);
+				this.announcement_list = await this.$u.post('/student_user/announcement-list',getan);
 				
 				
+				for(var item in this.announcement_list){
+					if(!item.ifConfirm){
+						this.new_annonce = true;
+						console.log("yesyesyes");
+						break;
+						
+					}
+				}
+				console.log(this.announcement_list);
 				//获取课程名称
-				this.class_name = this.announcement_list[0].cname;
+				//this.class_name = this.announcement_list[0].cname;
 			},
 			//连接至公告页面
 			toAnnouncementlist(Announcement) {
@@ -81,7 +96,37 @@
 			this.isAnnouncement = uni.getStorageSync("isAnnouncement");
 			this.isForum = uni.getStorageSync("isForum");
 			this.isJudge = uni.getStorageSync("isJudge");
+			console.log("isAnnouncement===", this.isAnnouncement);
+			console.log("isForum===", this.isForum);
+			console.log("isJudge===", this.isJudge);
 		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			this.test();
+			this.isAnnouncement = uni.getStorageSync("isAnnouncement");
+			this.isForum = uni.getStorageSync("isForum");
+			this.isJudge = uni.getStorageSync("isJudge");
+			setTimeout(function () {
+				uni.stopPullDownRefresh();
+			}, 1000);
+		},
+		onBackPress(e){
+			console.log(e);
+			if(e.from == 'backbutton'){
+				uni.switchTab(
+					{   
+					url:'/pages/classlist/classlist',
+					success:()=> {
+							console.log(1);
+							},
+					fail: (res) => {
+					console.log('navigate failed',res);
+				}
+				}
+				)
+
+			}
+		}
 	}
 </script>
 

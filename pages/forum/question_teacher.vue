@@ -1,5 +1,8 @@
 <template>
-	<uni-card  :title='ques.q_name+" 提问"' :sub-title="ques.q_user" :extra='ques.q_time' :thumbnail="ques_avatar" v-for = "(ques, index) in questions">
+	<uni-card  :title='ques.q_name+" 提问"' :sub-title="ques.q_user" :extra='ques.q_time' :thumbnail="ques_avatar" v-for = "(ques, index) in questions"
+		@touchstart="gtouchstart(ques.q_id, ques.q_user)"
+		@touchmove="gtouchmove()"
+		@touchend="showDeleteButton(ques.q_id)">
 		<view class="tag-view">
 			<uni-tag text="老师提问" type="primary" :circle="true" v-if = "ques.q_user[0] == '1'"/>
 		</view>
@@ -66,7 +69,7 @@
 			async like_it(ques_id, index){
 				//this.like_ques[index] = !this.like_ques[index];
 				this.questions[index].hasliked = true;
-				
+				this.questions[index].q_like ++;
 				// question_thumbs
 				let like_ques_post = {
 					sequence_num:ques_id,
@@ -77,9 +80,17 @@
 			},
 			async dislike_it(ques_id, index){
 				//暂时没有设置取消点赞功能
-				//this.questions[index].hasliked = false;
-				//this.like_ques[index] = !this.like_ques[index];
-		
+				this.questions[index].hasliked = false;
+				this.questions[index].q_like --;
+				// question_thumbs
+				let dislike_ques_post = {
+					sequence_num:ques_id,
+					tno:uni.getStorageSync('login_id')
+				};
+				console.log(dislike_ques_post);
+				await this.$u.post('teacher_user/question_thumbs_cancel',dislike_ques_post);
+				this.$u.toast('取消点赞成功');
+					
 			},
 			to_answer(q_num){
 				uni.setStorageSync("q_num", q_num);
@@ -88,11 +99,69 @@
 								url: 'pages/forum/answer_teacher',
 								type: 'to'
 							})
+			},
+			//长按事件（起始）
+			gtouchstart(item, id) {
+				var self = this;
+				this.timeOutEvent = setTimeout(function () {
+				self.longPress(item, id);
+				}, 500); //这里设置定时器，定义长按500毫秒触发长按事件
+				return false;
+			},
+			//手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
+			showDeleteButton(item) {
+				clearTimeout(this.timeOutEvent); //清除定时器
+				if (this.timeOutEvent != 0) {
+					//这里写要执行的内容（如onclick事件）
+					console.log("点击但未长按");
+				}
+				return false;
+			},
+			//如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
+			gtouchmove() {
+				clearTimeout(this.timeOutEvent); //清除定时器
+				this.timeOutEvent = 0;
+			},
+			//真正长按后应该执行的内容
+			async longPress(val, id) {
+				this.timeOutEvent = 0;
+				//执行长按要执行的内容，如弹出菜单
+				var that = this;
+				that.num = val;
+				that.ques_user = id;
+				console.log(that.num);
+				uni.showModal({
+					title: '确认删除提问',
+					content: '请确认是否删除这条提问',
+					success:async function (res) {
+						if (res.confirm) {		
+							//that.dele = true;
+							//console.log(that.dele);
+							let del = {
+								q_id: that.num,
+								user_id:uni.getStorageSync("login_id")
+							};
+							console.log(del);
+										
+							await that.$u.post('student_user/delete_question', del);
+							that.$u.toast('删除成功');
+						} else if (res.cancel) {
+							//不删除
+						}
+					}
+				});
 			}
 		},
 		onLoad() {
 			//console.log("=========");
 			this.getQuestions();
+		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			this.getQuestions();
+			setTimeout(function () {
+				uni.stopPullDownRefresh();
+			}, 1000);
 		}
 	}
 </script>

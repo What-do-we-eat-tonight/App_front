@@ -48,9 +48,9 @@
 				//到这里一定成功
 				this.$u.toast('添加成功!');
 				this.$u.route({
-					url: 'pages/teacher_announcement/teacher_announcement',
-					type: 'to'
-				})
+								url: 'pages/teacher_announcement/teacher_announcement',
+								type: 'to'
+							})
 			},
 			//加载草稿公告的内容
 			async get_draft() {
