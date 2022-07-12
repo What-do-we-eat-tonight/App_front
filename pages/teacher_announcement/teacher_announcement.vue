@@ -104,6 +104,15 @@
 			setTimeout(function () {
 				uni.stopPullDownRefresh();
 			}, 1000);
+		},
+		onBackPress(e){
+			console.log(e);
+			if(e.from == 'backbutton'){
+				console.log("??????");
+				setTimeout(()=>{
+					this.$u.route('/pages/class/class');
+				}, 500);
+			}
 		}
 	}
 </script>
