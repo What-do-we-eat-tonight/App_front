@@ -3,7 +3,6 @@
 		<view v-if="isLogin" style="margin-top:5%;margin-bottom:50rpx;">
 			<u-button @click="logout" style="width:30%;" :ripple="true" type="primary">退出登录</u-button>
 		</view>
-		<u-button> 我的信息</u-button>
 	</view>
 </template>
 

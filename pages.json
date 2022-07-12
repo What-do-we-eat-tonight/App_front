@@ -107,7 +107,16 @@
             "style" :                                                                                    
             {
 				"navigationBarTitleText": "添加公告",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"h5": {
+					"titleNView": {
+						"buttons": [{
+							"text": "保存草稿",
+							"fontSize": "30rpx",
+							"color": "#888888"
+						}]
+					}
+				}
             }
             
         }
@@ -148,7 +157,7 @@
 					"titleNView": {
 						"buttons": [{
 							"text": "添加公告",
-							"fontSize": "26rpx",
+							"fontSize": "30rpx",
 							"color": "#888888"
 						}]
 					}
