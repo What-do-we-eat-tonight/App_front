@@ -33,7 +33,7 @@
 				//到这里一定成功
 				this.$u.toast('添加成功!');
 				this.$u.route({
-								url: 'pages/announcement_list/announcement_list',
+								url: 'pages/teacher_announcement/teacher_announcement',
 								type: 'to'
 							})
 			},

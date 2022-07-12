@@ -1,17 +1,20 @@
 <template>
-	<uni-collapse v-for="(ans, index) in answers">
+	<uni-collapse v-for="(ans, index) in answers" style="margin-bottom: 5px;">
 		<uni-collapse-item titleBorder="none" >
 			<template v-slot:title>
 				<uni-list>
-				<uni-card  :title='ans.user_name+" 回答"' :sub-title="ans.user_id" :extra='ans.answer_time'  :thumbnail="ans_avatar">
-					<view class="tag-view">
+				<uni-card  :title='ans.user_name+" 回答"' :sub-title="ans.user_id" :extra='ans.answer_time'  :thumbnail="ans_avatar"
+					@touchstart="gtouchstart(ans.answer_num, ans.user_id)"
+					@touchmove="gtouchmove()"
+					@touchend="showDeleteButton(ans.answer_num, ans.user_id)">
+					<view class="tag-view" style="margin-bottom: 5px;margin-top: 5px;margin-left: 5px;">
 						<uni-tag text="老师赞过" type="error" :circle="true" v-if = "ans.teacher_like"/>
 					</view>
 					<text class="uni-body">{{ans.answer}}</text>
 					<view slot="actions" class="card-actions">
 						<view class="card-actions-item" >
 							<uni-icons type="heart" size="18" color="#999" @click="like_it1(ans.answer_num, index)" v-if = "!ans.hasliked"></uni-icons>
-							<uni-icons type="heart-filled" size="18" color="#ff0000" @click="dislike_it()" v-else></uni-icons>
+							<uni-icons type="heart-filled" size="18" color="#ff0000" @click="dislike_it1(ans.answer_num, index)" v-else></uni-icons>
 							<text class="card-actions-item-text">{{ans.like_num}}</text>
 						</view>
 						<view class="card-actions-item" @click="comment2(ans.user_name, ans.answer_num)">
@@ -22,16 +25,19 @@
 				</uni-card>
 				</uni-list>
 			</template>
-			<view class="content" v-for = "(ans2, index2) in ans.answer2s">
-				<uni-card  :title='ans2.user_name' :sub-title="ans2.user_id" :extra='ans2.answer_time'>
-					<view class="tag-view">
+			<view class="content" v-for = "(ans2, index2) in ans.answer2s" style = "margin-top: 5px;margin-bottom: 5px;">
+				<uni-card  :title='ans2.user_name' :sub-title="ans2.user_id" :extra='ans2.answer_time' 
+					@touchstart="gtouchstart2(ans2.answer_num, ans2.user_id)"
+					@touchmove="gtouchmove2()"
+					@touchend="showDeleteButton2(ans2.answer_num, ans2.user_id)">
+					<view class="tag-view" style="margin-bottom: 5px;margin-top: 5px;margin-left: 5px;">
 						<uni-tag text="老师赞过" type="error" :circle="true" v-if = "ans2.teacher_like"/>
 					</view>
 					<text class="uni-body">{{ans2.answer}}</text>
 					<view slot="actions" class="card-actions">
 						<view class="card-actions-item" >
 							<uni-icons type="heart" size="18" color="#999" @click="like_it2(ans2.answer_num, index, index2)" v-if = "!ans2.hasliked"></uni-icons>
-							<uni-icons type="heart-filled" size="18" color="#ff0000" @click="dislike_it()" v-else></uni-icons>
+							<uni-icons type="heart-filled" size="18" color="#ff0000" @click="dislike_it2(ans2.answer_num, index, index2)" v-else></uni-icons>
 							<text class="card-actions-item-text">{{ans2.like_num}}</text>
 						</view>
 						<view class="card-actions-item" @click="comment2(ans2.user_name, ans.answer_num)">
@@ -50,8 +56,8 @@
 		<uni-easyinput type = "textarea" v-model="ans2" :focus="focus" :placeholder="'回复:' + ans_who" v-else></uni-easyinput>
 		-->
 		
-		<input type = "textarea" rows="7" v-model="new_ans" ref = "myinput" focus placeholder="我也要写回答...." v-if = "level1"/>
-		<input type = "textarea" rows="7" v-model="ans2" ref = "myinput" focus :placeholder="'回复:' + ans_who" v-else/>
+		<textarea  style="height: 50px;" v-model="new_ans" ref = "myinput" placeholder="我也要写回答...." v-if = "level1"/>
+		<textarea  id = 'myinput2' style="height: 50px;" v-model="ans2" :focus="is_focus" ref="myinput2" :placeholder="'回复:' + ans_who" v-else />
 		<u-button @click="send" type="primary">发送</u-button>
 	</uni-card>
 
@@ -75,7 +81,11 @@
 					ans2:'',
 					question_no:0,
 					ans_no:0,
-					focus:false
+					is_focus:false,
+					num:-1,
+					ans_user:-1,
+					timeOutEvent1:0,
+					timeOutEvent2:0
 				}
 			},
 		
@@ -85,14 +95,39 @@
 				this.level1 = true;
 				this.ans_who = '';
 				this.ans_no = -1;
+				
+				//document.getElementById("myinput2").onselect();
 			},
-			comment2(name, num){
+			async comment2(name, num){
 				//二级评论
+				this.is_focus = false;
 				this.level1 = false;
 				this.ans_no = num;
 				this.ans_who = name;
 				console.log(this.level1);
-				this.$refs.myinput.focus();
+				/*
+				setTimeout(function() {
+					this.$refs.myinput2.focus()
+				}, 1)				
+				*/
+			   
+				
+				/*
+				setTimeout(function() {
+					document.getElementById("myinput2")[0].select();
+				}, 1)
+				*/
+				this.$nextTick(()=>{
+					this.is_focus = true;
+				})
+			   /*
+				setTimeout(()=>{
+					console.log(this.$refs.myinput2);
+					document.getElementById("myinput2").select();
+					//this.$refs.myinput2.focus();
+				},500)			   
+			   */
+
 			},
 			async send(){
 				let ans_post = {};
@@ -168,9 +203,29 @@
 				await this.$u.post('student_user/answer2_thumbs',like_ans2_post);
 				this.$u.toast('点赞成功');
 			},
-			async dislike_it(){
+			async dislike_it1(num, index){
 				//取消点赞
-				//暂时没有设计
+				this.answers[index].hasliked = false;
+				this.answers[index].like_num--;
+				//this.answers[index].teacher_like = false;
+				
+				let dislike_ans1_post = {
+					sequence_num:num,
+					tno:uni.getStorageSync('login_id')
+				};
+				await this.$u.post('student_user/answer_thumbs_cancel', dislike_ans1_post);
+				this.$u.toast('取消点赞成功');
+			},
+			async dislike_it2(num, index1, index2){
+				this.answers[index1].answer2s[index2].hasliked = false;
+				this.answers[index1].answer2s[index2].like_num --;
+				//this.answers[index1].answer2s[index2].teacher_like = false;
+				let dislike_ans2_post = {
+					sequence_num:num,
+					tno:uni.getStorageSync('login_id')
+				};
+				await this.$u.post('student_user/answer2_thumbs_cancel',dislike_ans2_post);
+				this.$u.toast('取消点赞成功');
 			},
 			async getAnswers(){
 				let test = {
@@ -182,11 +237,142 @@
 					this.answers = res;
 				});
 				console.log(this.answers);
+			},
+			//长按事件（起始）
+			gtouchstart(item, id) {
+				var self = this;
+				this.timeOutEvent1 = setTimeout(function () {
+				self.longPress(item, id);
+				}, 500); //这里设置定时器，定义长按500毫秒触发长按事件
+				return false;
+			},
+			//手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
+			showDeleteButton(item) {
+				clearTimeout(this.timeOutEvent1); //清除定时器
+				if (this.timeOutEvent1 != 0) {
+					//这里写要执行的内容（如onclick事件）
+					console.log("点击但未长按");
+				}
+				return false;
+			},
+			//如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
+			gtouchmove() {
+				clearTimeout(this.timeOutEvent1); //清除定时器
+				this.timeOutEvent1 = 0;
+			},
+			//真正长按后应该执行的内容
+			async longPress(val, id) {
+				this.timeOutEvent1 = 0;
+				//执行长按要执行的内容，如弹出菜单
+				var that = this;
+				that.num = val;
+				that.ans_user = id;
+				console.log(that.num);
+				uni.showModal({
+					title: '确认删除回答',
+					content: '请确认是否删除这条回答',
+					success:async function (res) {
+						if (res.confirm) {
+							//确认 删除回答
+							if(uni.getStorageSync('login_id') != that.ans_user){
+								//无权删除
+								console.log(uni.getStorageSync('login_id'));
+								console.log(that.ans_user);
+								console.log(uni.getStorageSync('login_id') == that.ans_user);
+								that.$u.toast("你无权删除");
+							}
+							else{
+								//that.dele = true;
+								//console.log(that.dele);
+								let del = {
+									answer_no1:that.num
+								};
+								console.log(del);
+											
+								await that.$u.post('student_user/del_answer1', del);
+								that.$u.toast('删除成功');
+							}
+			
+						} else if (res.cancel) {
+							//不删除
+						}
+					}
+				});
+			},
+			//长按事件（起始）
+			gtouchstart2(item, id) {
+				var self = this;
+				this.timeOutEvent2 = setTimeout(function () {
+				self.longPress2(item, id);
+				}, 500); //这里设置定时器，定义长按500毫秒触发长按事件
+				return false;
+			},
+			//手释放，如果在500毫秒内就释放，则取消长按事件，此时可以执行onclick应该执行的事件
+			showDeleteButton2(item) {
+				clearTimeout(this.timeOutEvent2); //清除定时器
+				if (this.timeOutEvent2 != 0) {
+					//这里写要执行的内容（如onclick事件）
+					console.log("点击但未长按");
+				}
+				return false;
+			},
+			//如果手指有移动，则取消所有事件，此时说明用户只是要移动而不是长按
+			gtouchmove2() {
+				clearTimeout(this.timeOutEvent2); //清除定时器
+				this.timeOutEvent2 = 0;
+			},
+			//真正长按后应该执行的内容
+			async longPress2(val, id) {
+				this.timeOutEvent = 0;
+				//执行长按要执行的内容，如弹出菜单
+				var that = this;
+				that.num = val;
+				that.ans_user = id;
+				console.log(that.num);
+				uni.showModal({
+					title: '确认删除回复',
+					content: '请确认是否删除这条回复',
+					success:async function (res) {
+						if (res.confirm) {
+							//确认 删除提问
+							if(uni.getStorageSync('login_id') != that.ans_user){
+								//无权删除
+								console.log(uni.getStorageSync('login_id'));
+								console.log(that.ans_user);
+								that.$u.toast("你无权删除");
+							}
+							else{
+								//that.dele = true;
+								//console.log(that.dele);
+								let del = {
+									answer_no2:that.num
+								};
+								console.log(del);
+											
+								await that.$u.post('student_user/del_answer2', del);
+								that.$u.toast('删除成功');
+							}
+			
+						} else if (res.cancel) {
+							//不删除
+						}
+					}
+				});
 			}
+			
+			
+			
 		},
 		onLoad() {
 			//console.log("=========");
 			this.getAnswers();
+		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			this.getAnswers();
+			setTimeout(function () {
+				uni.stopPullDownRefresh();
+			}, 1000);
 		}
 	}
 </script>
@@ -223,13 +409,14 @@
 		flex-direction: row;
 		justify-content: space-around;
 		align-items: center;
-		height: 45px;
-		border-top: 1px #eee solid;
+		height: 20px;
+		//border-top: px #eee solid;
 	}
 	.card-actions-item {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
+		margin: 5px;
 	}
 	.card-actions-item-text {
 		font-size: 12px;
@@ -249,7 +436,8 @@
 		}
 	
 		.content {
-			padding: 15px;
+			padding-left: 15px;
+			margin-right: 30px;
 		}
 	
 		.text {

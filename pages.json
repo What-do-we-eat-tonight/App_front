@@ -23,7 +23,7 @@
 			"path": "pages/classlist/classlist",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": true
 			}
 
 		}, {
@@ -43,64 +43,60 @@
 		}, {
 			"path": "pages/announcement_list/announcement_list",
 			"style": {
-				"navigationStyle": "custom", // 隐藏系统导航栏
-				"navigationBarTextStyle": "white" // 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
+				"navigationBarTitleText": "课程公告",
+				//"navigationStyle": "custom", // 隐藏系统导航栏
+				"navigationBarTextStyle": "black" ,// 状态栏字体为白色，只能为 white-白色，black-黑色 二选一
+				"enablePullDownRefresh": true
 			}
 
 		}, {
 			"path": "pages/class/class",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "课程详情",
+				"enablePullDownRefresh": true
 			}
 
 		}, {
 			"path":"pages/evaluation/evaluation",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "课程评价",
+				"enablePullDownRefresh": true
 			}
 		}, {
 			"path":"pages/evaluation/evaluation_teacher",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "课程评价",
+				"enablePullDownRefresh": true
 			}
 		},{
 			"path":"pages/mine/mine",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的",
 				"enablePullDownRefresh": false
 			}
 		},{
 			"path":"pages/forum/answer_teacher",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "问题回答",
+				"enablePullDownRefresh": true
 			}
 		},{
 			"path":"pages/forum/question_teacher",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},{
-			"path":"pages/forum/forum",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "问题",
+				"enablePullDownRefresh": true
 			}
 		},{
 			"path":"pages/forum/question",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "问题",
+				"enablePullDownRefresh": true
 			}
 		},{
 			"path":"pages/forum/answer",
 			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "问题回答",
+				"enablePullDownRefresh": true
 			}
 		}	    ,{
             "path" : "pages/add_announcement/add_announcement",
@@ -116,7 +112,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
             
         }
@@ -125,7 +121,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
             
         }
@@ -134,7 +130,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "课程详情",
-                "enablePullDownRefresh": false
+                "enablePullDownRefresh": true
             }
             
         }
@@ -143,7 +139,7 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "课程公告",
-                "enablePullDownRefresh": false,
+                "enablePullDownRefresh": true,
 				"h5": {
 					"titleNView": {
 						"buttons": [{
@@ -153,6 +149,14 @@
 						}]
 					}
 				}
+            }
+            
+        },{
+            "path" : "pages/change_password/change_password",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "修改密码",
+                "enablePullDownRefresh": false
             }
             
         }

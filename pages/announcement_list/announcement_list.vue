@@ -2,11 +2,11 @@
 <template>
 	<view class="index">
 		<!-- 以下用以显示课程列表 -->
-		<view v-for="(item,idx) in announcement_list" :key="idx">
+		<view v-for="(item,idx) in announcement_list" :key="idx" style="margin-top:15px;">
 			<!-- 点击进入课程公告内容页面 -->
 			<uni-collapse :accordion="true" @click="changestate(idx)">
 				<!-- 课程公告标题栏 -->
-				<uni-collapse-item align="left" :title="get_title(item.content).toString()" :open="true">
+				<uni-collapse-item align="left" :title="get_title(item.content).toString()" :open="true" >
 					<!-- 新消息提示标志 -->
 					<u-badge v-if="!item.ifConfirm" :is-dot="true" type="error" :offset="[10,10]"></u-badge>
 					<!-- 课程公告内容栏 -->
@@ -23,6 +23,7 @@
 				</uni-collapse-item>
 			</uni-collapse>
 		</view>
+		
 		
 	</view>
 </template>
@@ -76,6 +77,7 @@
 				
 				//重新获取课程公告列表
 				this.announcement_list = await this.$u.post('/student_user/announcement-list', this.c);
+				console.log(this.announcement_list);
 				this.is_state[idx] = this.announcement_list[idx].ifConfirm;
 			},
 			//截取公告第一分句作为公告标题
@@ -91,10 +93,17 @@
 				this.$u.route({
 					url: '/pages/class/class', //修改成“公告”页面地址
 				});
-			},
+			}
 		},
 		onShow() {
 			this.test();
+		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			this.test();
+			setTimeout(function () {
+				uni.stopPullDownRefresh();
+			}, 1000);
 		}
 	}
 </script>

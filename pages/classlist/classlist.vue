@@ -104,6 +104,15 @@
 			this.primary()
 			this.getid()
 			this.postlist()
+		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			this.primary();
+			this.getid();
+			this.postlist();
+			setTimeout(function () {
+				uni.stopPullDownRefresh();
+			}, 1000);
 		}
 	}
 </script>
