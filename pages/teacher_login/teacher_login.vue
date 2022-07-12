@@ -1,7 +1,7 @@
 <template>
 	<view v-if="!isLogin" class="login">
 		<u-navbar back-text="返回" title="剑未配妥，出门已是江湖"></u-navbar>
-		
+
 		<view style="width:300rpx;margin-top:15%;margin-bottom:50rpx;">
 			<u-image width="100%" height="300rpx" src="/static/teacher1.png" shape="circle"></u-image>
 		</view>
@@ -25,7 +25,9 @@
 				</u-col>
 			</u-row>
 		</view>
-
+	</view>
+	<view v-if="isLogin" style="margin-top:5%;margin-bottom:50rpx;">
+		<u-button @click="logout" style="width:30%;" :ripple="true" type="primary">退出登录</u-button>
 	</view>
 	<view v-if="isLogin" style="margin-top:5%;margin-bottom:50rpx;">
 		<u-button @click="logout" style="width:30%;" :ripple="true" type="primary">退出登录</u-button>
@@ -36,10 +38,10 @@
 	export default {
 		data() {
 			return {
-				t_id: '',
+				t_id: '',//存储教师工号
 				// t_id2: '',
-				is_t:false,//是否是教师
-				isLogin: false,
+				is_t: false, //是否是教师
+				isLogin: false,//存储登录状态
 				loginTeacher: {
 					teacher_id: '',
 					teacher_pwd: ''
@@ -48,26 +50,27 @@
 		},
 		methods: {
 			async login() {
-				
+
 				await this.$u.post('/teacher_user/login', this.loginTeacher);
 				//到这里一定成功
-				
+				uni.setStorageSync("is_t", true)
 				uni.setStorageSync("isLogin", true) //在客户端存储信息，结构式键值对
 				uni.setStorageSync("login_id", this.loginTeacher.teacher_id) //在客户端存储信息，结构式键值对
-				uni.setStorageSync("is_t",true)
 				
-				this.t_id2 = uni.getStorageSync("t_id");
-				console.log('the login id is' + this.t_id2);
-				
+
 				this.$u.toast('登陆成功!');
 				this.$u.route({
 					url: 'pages/classlist/classlist',
 					type: 'tab'
 				})
 			},
-			async register() {
+			logout() {
+				uni.setStorageSync("is_t",false)
+				uni.setStorageSync("isLogin", false) //在客户端存储信息，结构式键值对
+				
+				this.$u.toast('退出登录成功!');
 				this.$u.route({
-					url: 'pages/teacher_register/teacher_register',
+					url: 'pages/index/index'
 				})
 			},
 			logout() {
@@ -79,7 +82,13 @@
 				})
 			}
 		},
+		async register() {
+			this.$u.route({
+				url: 'pages/teacher_register/teacher_register',
+			})
+		},
 		onShow() {
+			this.is_t = uni.getStorageSync("is_t");
 			this.isLogin = uni.getStorageSync("isLogin");
 			console.log("+++++" + this.isLogin);
 		}

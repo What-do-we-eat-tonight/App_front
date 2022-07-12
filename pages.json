@@ -29,7 +29,7 @@
 		}, {
 			"path": "pages/teacher_login/teacher_login",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "登录",
 				"enablePullDownRefresh": false
 			}
 
@@ -71,7 +71,7 @@
 		},{
 			"path":"pages/mine/mine",
 			"style": {
-				"navigationBarTitleText": "我的",
+				"navigationBarTitleText": "我的主页",
 				"enablePullDownRefresh": false
 			}
 		},{
@@ -103,7 +103,16 @@
             "style" :                                                                                    
             {
 				"navigationBarTitleText": "添加公告",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"h5": {
+					"titleNView": {
+						"buttons": [{
+							"text": "保存草稿",
+							"fontSize": "30rpx",
+							"color": "#888888"
+						}]
+					}
+				}
             }
             
         }
@@ -144,7 +153,7 @@
 					"titleNView": {
 						"buttons": [{
 							"text": "添加公告",
-							"fontSize": "26rpx",
+							"fontSize": "30rpx",
 							"color": "#888888"
 						}]
 					}

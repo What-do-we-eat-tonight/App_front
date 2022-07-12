@@ -64,7 +64,6 @@
 				//获取课程公告列表
 				//列表内容：ano,cname,cno,content,ifconfirm,submit_time,tname,tno
 				this.announcement_list = await this.$u.post('/student_user/announcement-list', this.c);
-				console.log(this.announcement_list);
 			},
 			//截取公告第一分句作为公告标题
 			get_title(content) {
