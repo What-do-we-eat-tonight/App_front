@@ -33,7 +33,8 @@
 				content: '公告发布后不可修改，您是否确认添加公告？',
 				addannouncement: {
 					tno: '',
-					cno: ''
+					cno: '',
+					content:''
 				},
 				recive_content: [],
 			}
@@ -44,6 +45,8 @@
 			},
 			async add() {
 				console.log(this.addannouncement);
+				this.addannouncement.tno = uni.getStorageSync("login_id");
+				this.addannouncement.cno = uni.getStorageSync("cno");
 				await this.$u.post('/teacher_user/insert-announcement', this.addannouncement);
 				//到这里一定成功
 				this.$u.toast('添加成功!');
@@ -57,7 +60,7 @@
 				this.addannouncement.tno = uni.getStorageSync("login_id");
 				this.addannouncement.cno = uni.getStorageSync("cno");
 				console.log(this.addannouncement);
-
+					
 				this.recive_content = await this.$u.post('/teacher_user/get-draft-announcement', this.addannouncement);
 				console.log("==============");
 				console.log(this.recive_content);
@@ -67,6 +70,8 @@
 			}
 		},
 		onNavigationBarButtonTap(){
+			this.addannouncement.tno = uni.getStorageSync("login_id");
+			this.addannouncement.cno = uni.getStorageSync("cno");
 			this.recive_content = this.$u.post('/teacher_user/save-draft-announcement', this.addannouncement);
 			console.log("==============");
 			console.log(this.recive_content);

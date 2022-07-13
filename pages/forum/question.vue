@@ -54,7 +54,9 @@
 					time:"2022"
 				};
 				await this.$u.post('student_user/PutQuestion',ques_post);
-				this.$u.toast('发布问题成功成功');
+				this.$u.toast('发布问题成功');
+				this.getQuestions();
+				this.new_ques = '';
 			},
 			async getQuestions(){
 				let test = {
@@ -175,6 +177,14 @@
 			setTimeout(function () {
 				uni.stopPullDownRefresh();
 			}, 1000);
+		},
+		onBackPress(e){
+			console.log(e);
+			if(e.from == 'backbutton'){
+				setTimeout(()=>{
+					this.$u.route('/pages/class/class');
+				}, 500);
+			}
 		}
 		
 	}

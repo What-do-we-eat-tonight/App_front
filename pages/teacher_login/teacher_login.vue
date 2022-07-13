@@ -21,7 +21,7 @@
 					<u-button @click="login" style="width:80%;" :ripple="true" type="primary">登录</u-button>
 				</u-col>
 				<u-col span="6">
-					<u-button @click="login" style="width:80%;" :ripple="true" type="primary">注册</u-button>
+					<u-button @click="register" style="width:80%;" :ripple="true" type="primary">注册</u-button>
 				</u-col>
 			</u-row>
 		</view>
@@ -69,20 +69,12 @@
 				this.$u.route({
 					url: 'pages/index/index'
 				})
-			},
-			logout() {
-				uni.setStorageSync("isLogin", false) //在客户端存储信息，结构式键值对
-				console.log("isLogin is " + this.isLogin);
-				this.$u.toast('退出登录成功!');
+			},	
+			async register() {
 				this.$u.route({
-					url: 'pages/index/index'
+					url: 'pages/teacher_register/teacher_register',
 				})
-			}
-		},
-		async register() {
-			this.$u.route({
-				url: 'pages/teacher_register/teacher_register',
-			})
+			},
 		},
 		onShow() {
 			this.is_t = uni.getStorageSync("is_t");
