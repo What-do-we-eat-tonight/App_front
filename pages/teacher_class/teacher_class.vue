@@ -83,6 +83,25 @@
 			setTimeout(function () {
 				uni.stopPullDownRefresh();
 			}, 1000);
+		},
+		onBackPress(e){
+			console.log(e);
+			if(e.from == 'backbutton'){
+					
+				setTimeout(()=>{
+					uni.switchTab(
+						{   
+						url:'/pages/classlist/classlist',
+						success:()=> {
+								console.log(1);
+								},
+						fail: (res) => {
+						console.log('navigate failed',res);
+					}
+					}
+					)
+				}, 300);
+			}
 		}
 	}
 </script>

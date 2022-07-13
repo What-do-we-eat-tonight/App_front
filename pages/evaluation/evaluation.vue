@@ -56,6 +56,8 @@
 				console.log(put_evaluation_info);
 				await this.$u.post('/student_user/putEvaluation',put_evaluation_info);
 				this.$u.toast('发送成功');
+				this.value = '';
+				this.getitems();
 			},
 			//长按事件（起始）
 			gtouchstart(item) {

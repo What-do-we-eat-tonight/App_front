@@ -69,6 +69,12 @@
 				"enablePullDownRefresh": true
 			}
 		},{
+			"path":"pages/all_course/all_course",
+			"style": {
+				"navigationBarTitleText": "所有课程",
+				"enablePullDownRefresh": true
+			}
+		},{
 			"path":"pages/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的主页",

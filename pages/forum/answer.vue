@@ -151,6 +151,8 @@
 					await this.$u.post('student_user/answer2',ans_post);
 					this.$u.toast('发送成功');
 				}
+				this.new_ans = '';
+				this.getAnswers();
 				
 			},
 			async getQuestions(){

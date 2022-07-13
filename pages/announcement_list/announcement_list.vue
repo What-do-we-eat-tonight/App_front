@@ -108,9 +108,11 @@
 		onBackPress(e){
 			console.log(e);
 			if(e.from == 'backbutton'){
-				this.$u.route('/pages/class/class');
-
-			}
+					setTimeout(()=>{
+						console.log("classclassclass");
+						this.$u.route('/pages/class/class');
+					}, 500);
+				}
 		}
 	}
 </script>

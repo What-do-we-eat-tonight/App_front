@@ -52,13 +52,16 @@
 					time:"2022"
 				};
 				await this.$u.post('student_user/PutQuestion',ques_post);
-				this.$u.toast('发布问题成功成功');
+				this.$u.toast('发布问题成功');
+				this.new_ques = '';
+				this.getQuestions();
 			},
 			async getQuestions(){
 				let test = {
-					cno:'COMP1221',
+					cno:uni.getStorageSync("cno"),
 					user_id:uni.getStorageSync("login_id")
 				};
+				console.log(test);
 				await this.$u.post('student_user/GetQuestion',test).then((res)=>{
 					this.questions = res;
 					this.like_ques.push({});
@@ -162,6 +165,14 @@
 			setTimeout(function () {
 				uni.stopPullDownRefresh();
 			}, 1000);
+		},
+		onBackPress(e){
+			console.log(e);
+			if(e.from == 'backbutton'){
+				setTimeout(()=>{
+					this.$u.route('/pages/teacher_class/teacher_class');
+				}, 500);
+			}
 		}
 	}
 </script>

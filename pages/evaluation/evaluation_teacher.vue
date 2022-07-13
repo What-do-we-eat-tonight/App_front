@@ -81,7 +81,7 @@
 							console.log(del);
 		
 							await that.$u.post('student_user/delete_eva', del);
-							that.$u.toast('删除成功');
+							//that.$u.toast('删除成功');
 						} else if (res.cancel) {
 							//不删除
 						}

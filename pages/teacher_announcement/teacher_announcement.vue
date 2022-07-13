@@ -5,7 +5,7 @@
 <template>
 	<view class="index">
 		<!-- 以下用以显示课程列表 -->
-		<view v-for="(item,idx) in announcement_list" :key="idx">
+		<view v-for="(item,idx) in announcement_list" :key="idx" style="margin-top:15px;">
 			<!-- 点击进入课程公告内容页面 -->
 			<uni-collapse :accordion="true">
 				<!-- 课程公告标题栏 -->
@@ -110,7 +110,7 @@
 			if(e.from == 'backbutton'){
 				console.log("??????");
 				setTimeout(()=>{
-					this.$u.route('/pages/class/class');
+					this.$u.route('/pages/teacher_class/teacher_class');
 				}, 500);
 			}
 		}

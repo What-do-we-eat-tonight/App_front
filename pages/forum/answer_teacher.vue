@@ -129,6 +129,8 @@
 					await this.$u.post('student_user/answer2',ans_post);
 					this.$u.toast('发送成功');
 				}
+				this.getAnswers();
+				this.new_ans = '';
 				
 			},
 			async getQuestions(){
